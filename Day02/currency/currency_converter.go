@@ -15,7 +15,6 @@ const (
 )
 
 // Exchange fee as percentage (1%)
-// ค่าธรรมเนียมเป็นเปอร์เซ็นต์ (1%)
 const FeePercentage = 0.01
 
 func main() {
