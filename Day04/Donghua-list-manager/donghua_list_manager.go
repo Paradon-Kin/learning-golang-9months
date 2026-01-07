@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Donghua struct {
 	title    string
@@ -23,8 +25,9 @@ func main() {
 		showMenu()
 
 		var choice int
-		fmt.Print("Your choice (1-6):")
+		fmt.Print("Your choice (1-7):")
 		fmt.Scan(&choice)
+		fmt.Println()
 
 		switch choice {
 		case 1:
@@ -36,6 +39,10 @@ func main() {
 		case 4:
 			updateRating()
 		case 5:
+			viewByStatus()
+		case 6:
+			deleteDonghua()
+		case 7:
 			fmt.Println("Thank you for using Donghua Manager")
 			return
 		default:
@@ -47,9 +54,10 @@ func main() {
 
 func addSampleData() {
 	DonghuaList = []Donghua{
-		{title: "The King's Avatar", episodes: 12, rating: 8.5, status: "Completed"},
-		{title: "Link Click", episodes: 11, rating: 9.0, status: "Watching"},
-		{title: "Scissor Seven", episodes: 30, rating: 8.7, status: "Completed"},
+		{title: "Avatar", episodes: 12, rating: 8.5, status: "Completed"},
+		{title: "Click", episodes: 11, rating: 9.0, status: "Watching"},
+		{title: "Scissor", episodes: 30, rating: 8.7, status: "Completed"},
+		{title: "Aventure", episodes: 30, rating: 8.7, status: "Plan to watch"},
 	}
 }
 
@@ -59,7 +67,9 @@ func showMenu() {
 	fmt.Println("2. View All")
 	fmt.Println("3. Search")
 	fmt.Println("4. Update Rating")
-	fmt.Println("5. Exit")
+	fmt.Println("5. View by status")
+	fmt.Println("6. Delete")
+	fmt.Println("7. Exit")
 	fmt.Println()
 }
 
@@ -90,7 +100,7 @@ func addDonghua() {
 
 	fmt.Println("Status:")
 	fmt.Println("1. Watching")
-	fmt.Println("2. Complete")
+	fmt.Println("2. Completed")
 	fmt.Println("3. Plan to watch")
 
 	var statusChoice int
@@ -101,9 +111,9 @@ func addDonghua() {
 	case 1:
 		d.status = "Watching"
 	case 2:
-		d.status = "Complete"
+		d.status = "Completed"
 	case 3:
-		d.status = "Plan to wathch"
+		d.status = "Plan to watch"
 	default:
 		fmt.Println("Invalid status, setting to 'Plan to watch'")
 		d.status = "Plan to watch"
@@ -193,5 +203,71 @@ func updateRating() {
 	}
 	if !found {
 		fmt.Printf("'%s' not found\n", searchTitle)
+	}
+}
+
+func viewByStatus() {
+	fmt.Println("View By status")
+	fmt.Println("1. Watching")
+	fmt.Println("2. Completed")
+	fmt.Println("3. Plan to watch")
+	fmt.Println("-----------------------------")
+	fmt.Println()
+
+	var choice int
+	fmt.Print("Your choice (1-3):")
+	fmt.Scan(&choice)
+	fmt.Println()
+
+	var searchStatus string
+
+	switch choice {
+	case 1:
+		searchStatus = "Watching"
+	case 2:
+		searchStatus = "Completed"
+	case 3:
+		searchStatus = "Plan to watch"
+	default:
+		fmt.Println("Invalid choice")
+		return
+	}
+
+	found := false
+	for _, d := range DonghuaList {
+		if d.status == searchStatus {
+			found = true
+			fmt.Printf("Donghua name:%s\n", d.title)
+			fmt.Printf("Rating:%.1f\n", d.rating)
+			fmt.Printf("Status:%s\n", d.status)
+			fmt.Println("--------------------------------")
+		}
+	}
+
+	if !found {
+		fmt.Println("Not found")
+	}
+}
+
+func deleteDonghua() {
+	var searchTitle string
+	fmt.Println("--- ลบข้อมูล Donghua ---")
+	fmt.Print("กรอกชื่อเรื่องที่ต้องการลบ: ")
+	fmt.Scan(&searchTitle)
+
+	found := false
+
+	for index, d := range DonghuaList {
+
+		if d.title == searchTitle {
+			found = true
+			DonghuaList = append(DonghuaList[:index], DonghuaList[index+1:]...)
+			fmt.Printf("Deleted '%s' successfully\n", d.title)
+			break
+		}
+	}
+
+	if !found {
+		fmt.Printf("Not found '%s'\n", searchTitle)
 	}
 }
