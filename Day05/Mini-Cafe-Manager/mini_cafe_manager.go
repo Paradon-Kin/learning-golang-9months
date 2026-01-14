@@ -131,7 +131,7 @@ func addDrink() {
 }
 
 func editPrice() {
-	fmt.Println("---- Edit Price ----")
+	fmt.Println("---------- Edit Price -----------")
 
 	fmt.Println("Enter the menu name to edit price")
 
