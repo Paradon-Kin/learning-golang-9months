@@ -12,7 +12,7 @@ func main() {
 		{name: "kin", score: 50},
 		{name: "gus", score: 45},
 	}
-	for i := 0; i < len(s); i++ {
+	for i := range s {
 		bonus(&s[i])
 		fmt.Println("", s)
 	}

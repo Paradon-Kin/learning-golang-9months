@@ -82,7 +82,7 @@ func addProduct() {
 
 	productList = append(productList, p)
 
-	fmt.Printf("Add %s price %.1f(s)", p.name, p.price)
+	fmt.Printf("Add %s price %.1f(s)\n", p.name, p.price)
 
 }
 
