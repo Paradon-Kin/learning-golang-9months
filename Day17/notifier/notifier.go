@@ -41,7 +41,6 @@ func containsAt(s string) bool {
 			return true
 		}
 	}
-
 	return false
 }
 
