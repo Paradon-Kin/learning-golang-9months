@@ -37,12 +37,12 @@ func TestSubtract(t *testing.T) {
 		{"Zero", 0, 0, 0},
 	}
 
-	for _, ts := range tests {
-		t.Run(ts.name, func(t *testing.T) {
-			got := Subtract(ts.a, ts.b)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := Subtract(tt.a, tt.b)
 
-			if got != ts.want {
-				t.Errorf("Subtract(%d, %d) = %d;want = %d", ts.a, ts.b, got, ts.want)
+			if got != tt.want {
+				t.Errorf("Subtract(%d, %d) = %d;want = %d", tt.a, tt.b, got, tt.want)
 			}
 		})
 
